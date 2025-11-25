@@ -1,2 +1,11 @@
-example_setting:
-  default: true
+show_personal_inbox:
+  type: enum
+  default: "All users"
+  choices:
+    - "All users"
+    - "Those, who can send PMs"
+    - "Nobody"
+hide_group_inboxes:
+  type: list
+  list_type: group
+  default: ""

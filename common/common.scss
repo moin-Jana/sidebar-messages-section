@@ -1,0 +1,14 @@
+.sidebar-section-link.pm-inbox-count::after {
+  font-size: var(--font-down-2);
+  margin-left: auto;
+}
+
+@for $i from 1 through 99 {
+  .pm-inbox-count-#{$i}::after {
+    content: "#{$i}";
+  }
+}
+
+.pm-inbox-count-99plus::after {
+  content: "99+";
+}

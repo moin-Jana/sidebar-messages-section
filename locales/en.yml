@@ -1,5 +1,14 @@
 en:
   theme_metadata:
-    description: ''
+    description: "Adds personal and group message inbox links to the sidebar, including unread message indicators"
     settings:
-      example_setting: A description of a setting.
+      show_personal_inbox: "Who should see the link to their personal inbox?"
+      hide_group_inboxes: "Select which group inboxes should be hidden from the sidebar."
+  messages: 
+    title: "Messages"
+    action: "New personal message"
+  personal_inbox:
+    text: "Personal"
+    title: "Personal inbox"
+  group_inbox:
+    title: "%{groupName} inbox"
