@@ -2,7 +2,7 @@
   "name": "Messages section for sidebar",
   "component": true,
   "authors": "Moin",
-  "about_url": "TODO: Put your theme's public repo or Meta topic URL here",
+  "about_url": "https://meta.discourse.org/t/messages-section-for-sidebar/389664",
   "license_url": "https://github.com/moin-Jana/sidebar-messages-section/blob/main/LICENSE",
   "theme_version": "1.0.0",
   "minimum_discourse_version": null,
