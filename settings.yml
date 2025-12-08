@@ -5,6 +5,12 @@ show_personal_inbox:
     - "All users"
     - "Those, who can send PMs"
     - "Nobody"
+group_inbox_type:
+  type: enum
+  default: Group within personal inbox
+  choices:
+    - "Group within personal inbox"
+    - "Group page"
 hide_group_inboxes:
   type: list
   list_type: group
