@@ -12,24 +12,28 @@ export default apiInitializer((api) => {
 
   const useGroupPage = settings.group_inbox_type === "Group page";
 
-  class GroupPageInboxLink extends GroupInboxLink {
-    constructor(currentUser, pmState, group) {
-      super(currentUser, pmState, group);
-      this.group = group;
-    }
-
-    get href() {
-      return "/g/" + encodeURIComponent(this.group.name) + "/messages/inbox";
-    }
-  
-    get route() {
-      return null;
-    }
-
-    get models() {
-      return null;
-    }
+class GroupPageInboxLink extends GroupInboxLink {
+  constructor(currentUser, pmState, group) {
+    super(currentUser, pmState, group);
+    this.group = group;
   }
+
+  // Use the group inbox route; Ember will generate the URL
+  get route() {
+    return "group.messages.inbox";
+  }
+
+  // Pass the group key (canonical URL segment is the group name)
+  get models() {
+    return [this.group.name];
+  }
+
+  // Keep the link highlighted across all group message tabs
+  get currentWhen() {
+    return "group.messages group.messages.inbox group.messages.sent group.messages.archive";
+  }
+
+}
 
   const showPersonalInbox = (() => {
     const mode = settings.show_personal_inbox;
