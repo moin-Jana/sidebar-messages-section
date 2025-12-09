@@ -3,7 +3,7 @@ en:
     description: "Adds personal and group message inbox links to the sidebar, including unread message indicators"
     settings:
       show_personal_inbox: "Who should see the link to their personal inbox?"
-      group_inbox_type: "View inboxes within personal inbox, or via the respective Group page?"
+      group_inbox_type: "View group inboxes within the user's personal inbox, or via the selected Group's page"
       hide_group_inboxes: "Select which group inboxes should be hidden from the sidebar."
   messages: 
     title: "Messages"
