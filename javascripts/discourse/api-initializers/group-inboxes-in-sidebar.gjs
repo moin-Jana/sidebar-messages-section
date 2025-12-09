@@ -18,19 +18,26 @@ class GroupPageInboxLink extends GroupInboxLink {
     this.group = group;
   }
 
-  // Make the sidebar treat this link as active when you’re on the group inbox
+  // Route used for SPA navigation when clicking the link
   get route() {
     return "group.messages.inbox";
   }
 
   get models() {
-    // Discourse uses group.name as the URL key
     return [this.group.name];
   }
 
-  // Keep href so users can open in new tab via middle-click/context menu
+  // Middle-click / open-in-new-tab
   get href() {
     return "/g/" + encodeURIComponent(this.group.name) + "/messages/inbox";
+  }
+
+  // Keep the link active for any group messages subpage
+  get active() {
+    const encodedName = encodeURIComponent(this.group.name);
+    const url = router.currentURL || "";
+    // Matches /g/<group>/messages, /g/<group>/messages/inbox, /sent, /archive, etc.
+    return url.indexOf("/g/" + encodedName + "/messages") === 0;
   }
 }
 
