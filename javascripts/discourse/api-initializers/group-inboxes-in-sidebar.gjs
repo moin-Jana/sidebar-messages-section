@@ -12,46 +12,24 @@ export default apiInitializer((api) => {
 
   const useGroupPage = settings.group_inbox_type === "Group page";
 
-class GroupPageInboxLink extends GroupInboxLink {
-  constructor(currentUser, pmState, group) {
-    super(currentUser, pmState, group);
-    this.group = group;
-  }
+  class GroupPageInboxLink extends GroupInboxLink {
+    constructor(currentUser, pmState, group) {
+      super(currentUser, pmState, group);
+      this.group = group;
+    }
 
-  // SPA navigation target
-  get route() {
-    return "group.messages.inbox";
-  }
+    get href() {
+      return "/g/" + encodeURIComponent(this.group.name) + "/messages/inbox";
+    }
+  
+    get route() {
+      return null;
+    }
 
-  get models() {
-    return [this.group.name];
+    get models() {
+      return null;
+    }
   }
-
-  // Middle-click / open-in-new-tab
-  get href() {
-    return "/g/" + encodeURIComponent(this.group.name) + "/messages/inbox";
-  }
-
-  // Help LinkTo consider related routes as "current"
-  get currentWhen() {
-    // Include all group messages tabs you use
-    return "group.messages group.messages.inbox group.messages.sent group.messages.archive";
-  }
-
-  // Active/highlight logic (URL-based) — used by some sidebar versions
-  get active() {
-    const url = router.currentURL || "";
-    const enc = encodeURIComponent(this.group.name);
-    return url.indexOf("/g/" + enc + "/messages") === 0;
-  }
-
-  // Alternate hook used by other sidebar versions
-  isActive(routerService) {
-    const url = (routerService && routerService.currentURL) || router.currentURL || "";
-    const enc = encodeURIComponent(this.group.name);
-    return url.indexOf("/g/" + enc + "/messages") === 0;
-  }
-}
 
   const showPersonalInbox = (() => {
     const mode = settings.show_personal_inbox;
