@@ -12,35 +12,21 @@ export default apiInitializer((api) => {
 
   const useGroupPage = settings.group_inbox_type === "Group page";
 
-class GroupPageInboxLink extends GroupInboxLink {
-  constructor(currentUser, pmState, group) {
-    super(currentUser, pmState, group);
-    this.group = group;
+  class GroupPageInboxLink extends GroupInboxLink {
+    constructor(currentUser, pmState, group) {
+      super(currentUser, pmState, group);
+      this.group = group;
+    }
+    get href() {
+      return "/g/" + encodeURIComponent(this.group.name) + "/messages/inbox";
+    }
+    get route() {
+      return null;
+    }
+    get models() {
+      return null;
+    }
   }
-
-  // Navigate via router (SPA) to the group inbox
-  get route() {
-    return "group.messages.inbox";
-  }
-
-  // Pass the group key used in URLs (group.name)
-  get models() {
-    return [this.group.name];
-  }
-
-  // IMPORTANT: prevent the base class from generating a personal-inbox URL
-  // Returning null forces the sidebar to use LinkTo for routing,
-  // which preserves unread indicators and active styling.
-  get href() {
-    return null;
-  }
-
-  // Optional: broaden highlight to other tabs IF these routes exist on your site.
-  // Start minimal to avoid “no route named …” errors. You can expand after checking.
-  get currentWhen() {
-    return "group.messages.inbox";
-  }
-}
 
   const showPersonalInbox = (() => {
     const mode = settings.show_personal_inbox;
