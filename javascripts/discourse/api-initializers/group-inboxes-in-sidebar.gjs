@@ -18,7 +18,7 @@ class GroupPageInboxLink extends GroupInboxLink {
     this.group = group;
   }
 
-  // Navigate to the inbox tab
+  // SPA navigation target
   get route() {
     return "group.messages.inbox";
   }
@@ -32,18 +32,24 @@ class GroupPageInboxLink extends GroupInboxLink {
     return "/g/" + encodeURIComponent(this.group.name) + "/messages/inbox";
   }
 
-  // Keep this link highlighted on ANY group messages subpage:
-  // /g/<group>/messages, /inbox, /sent, /archive, etc.
-  get forceActive() {
-    const url = router.currentURL || "";
-    const encoded = encodeURIComponent(this.group.name);
-    return url.indexOf("/g/" + encoded + "/messages") === 0;
+  // Help LinkTo consider related routes as "current"
+  get currentWhen() {
+    // Include all group messages tabs you use
+    return "group.messages group.messages.inbox group.messages.sent group.messages.archive";
   }
 
-  // Optional: also tell the router which set of routes should count as "current"
-  // (helps in some sidebar versions)
-  get currentWhen() {
-    return "group.messages group.messages.inbox group.messages.sent group.messages.archive";
+  // Active/highlight logic (URL-based) — used by some sidebar versions
+  get active() {
+    const url = router.currentURL || "";
+    const enc = encodeURIComponent(this.group.name);
+    return url.indexOf("/g/" + enc + "/messages") === 0;
+  }
+
+  // Alternate hook used by other sidebar versions
+  isActive(routerService) {
+    const url = (routerService && routerService.currentURL) || router.currentURL || "";
+    const enc = encodeURIComponent(this.group.name);
+    return url.indexOf("/g/" + enc + "/messages") === 0;
   }
 }
 
