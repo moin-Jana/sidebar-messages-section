@@ -13,11 +13,24 @@ export default apiInitializer((api) => {
   const useGroupPage = settings.group_inbox_type === "Group page";
 
   class GroupPageInboxLink extends GroupInboxLink {
-    constructor(currentUser, pmState, group) {
-      super(currentUser, pmState, group);
-      this.group = group;
-    }
+  constructor(currentUser, pmState, group) {
+    super(currentUser, pmState, group);
+    this.group = group;
+  }
 
+  get href() {
+    return `/g/${encodeURIComponent(this.group.name)}/messages/inbox`;
+  }
+
+  get route() {
+    return null;
+  }
+
+  get models() {
+    return null;
+  }
+}
+  
     get href() {
       // Use the actual slug provided on the group object
       return `/g/${encodeURIComponent(this.group.slug)}/messages/inbox`;
