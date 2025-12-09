@@ -14,16 +14,22 @@ export default apiInitializer((api) => {
 
   class GroupPageInboxLink extends GroupInboxLink {
     constructor(currentUser, pmState, group) {
-      super(currentUser, pmState, group);
-      this.group = group;
+     super(currentUser, pmState, group);
+    // ensure we have the group handy for URL building
+     this.group = group;
+    }
 
-      // Use the canonical group identifier used in URLs
-      const groupKey = group.name;
+    get href() {
+      return "/g/" + encodeURIComponent(this.group.name) + "/messages/inbox";
+    }
 
-      // Provide both a route/models for SPA transitions and an href for middle-clicks
-      this.route = "group.messages.inbox";
-      this.models = [groupKey];
-      this.href = router.urlFor("group.messages.inbox", groupKey);
+    // Return null so the sidebar uses href directly
+    get route() {
+      return null;
+    }
+
+    get models() {
+      return null;
     }
   }
 
