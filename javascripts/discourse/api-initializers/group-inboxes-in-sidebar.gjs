@@ -30,7 +30,7 @@ class GroupPageInboxLink extends GroupInboxLink {
 
   // Keep the link highlighted across all group message tabs
   get currentWhen() {
-    return "group.messages group.messages.inbox group.messages.sent group.messages.archive";
+    return "group.messages group.messages.inbox group.messages.archive";
   }
 
 }
