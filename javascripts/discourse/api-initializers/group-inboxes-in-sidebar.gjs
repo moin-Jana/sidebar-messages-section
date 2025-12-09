@@ -18,7 +18,7 @@ class GroupPageInboxLink extends GroupInboxLink {
     this.group = group;
   }
 
-  // Route used for SPA navigation when clicking the link
+  // Navigate to the inbox tab
   get route() {
     return "group.messages.inbox";
   }
@@ -32,12 +32,18 @@ class GroupPageInboxLink extends GroupInboxLink {
     return "/g/" + encodeURIComponent(this.group.name) + "/messages/inbox";
   }
 
-  // Keep the link active for any group messages subpage
-  get active() {
-    const encodedName = encodeURIComponent(this.group.name);
+  // Keep this link highlighted on ANY group messages subpage:
+  // /g/<group>/messages, /inbox, /sent, /archive, etc.
+  get forceActive() {
     const url = router.currentURL || "";
-    // Matches /g/<group>/messages, /g/<group>/messages/inbox, /sent, /archive, etc.
-    return url.indexOf("/g/" + encodedName + "/messages") === 0;
+    const encoded = encodeURIComponent(this.group.name);
+    return url.indexOf("/g/" + encoded + "/messages") === 0;
+  }
+
+  // Optional: also tell the router which set of routes should count as "current"
+  // (helps in some sidebar versions)
+  get currentWhen() {
+    return "group.messages group.messages.inbox group.messages.sent group.messages.archive";
   }
 }
 
