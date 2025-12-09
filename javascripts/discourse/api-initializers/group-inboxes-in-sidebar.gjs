@@ -12,26 +12,27 @@ export default apiInitializer((api) => {
 
   const useGroupPage = settings.group_inbox_type === "Group page";
 
-  class GroupPageInboxLink extends GroupInboxLink {
-    constructor(currentUser, pmState, group) {
-     super(currentUser, pmState, group);
-    // ensure we have the group handy for URL building
-     this.group = group;
-    }
-
-    get href() {
-      return "/g/" + encodeURIComponent(this.group.name) + "/messages/inbox";
-    }
-
-    // Return null so the sidebar uses href directly
-    get route() {
-      return null;
-    }
-
-    get models() {
-      return null;
-    }
+class GroupPageInboxLink extends GroupInboxLink {
+  constructor(currentUser, pmState, group) {
+    super(currentUser, pmState, group);
+    this.group = group;
   }
+
+  // Make the sidebar treat this link as active when you’re on the group inbox
+  get route() {
+    return "group.messages.inbox";
+  }
+
+  get models() {
+    // Discourse uses group.name as the URL key
+    return [this.group.name];
+  }
+
+  // Keep href so users can open in new tab via middle-click/context menu
+  get href() {
+    return "/g/" + encodeURIComponent(this.group.name) + "/messages/inbox";
+  }
+}
 
   const showPersonalInbox = (() => {
     const mode = settings.show_personal_inbox;
