@@ -4,7 +4,6 @@ import { i18n } from "discourse-i18n";
 export default class GroupInboxLink extends BaseCustomSidebarSectionLink {
   prefixType = "icon";
   prefixValue = "inbox";
-  route = "userPrivateMessages.group";
 
   constructor(currentUser, pmState, group) {
     super();
@@ -27,8 +26,16 @@ export default class GroupInboxLink extends BaseCustomSidebarSectionLink {
     return this.group.name;
   }
 
+  get route() {
+    return settings.use_group_page_inbox
+      ? "group.messages.inbox"
+      : "userPrivateMessages.group";
+  }
+
   get models() {
-    return [this.currentUser, this.group.name];
+    return settings.use_group_page_inbox
+      ? [this.group.name]
+      : [this.currentUser, this.group.name];
   }
 
   get unreadCount() {
