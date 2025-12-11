@@ -5,6 +5,9 @@ show_personal_inbox:
     - "All users"
     - "Those, who can send PMs"
     - "Nobody"
+use_group_page_inbox:
+  type: bool
+  default: false
 hide_group_inboxes:
   type: list
   list_type: group
