@@ -5,6 +5,16 @@ en:
       show_personal_inbox: "Who should see the link to their personal inbox?"
       hide_group_inboxes: "Select which group inboxes should be hidden from the sidebar."
       use_group_page_inbox: "Link to group inbox on group page<br><small>If enabled, group inbox links in the sidebar will open the inbox on the group’s page (/g/group_name/messages/inbox). If disabled, they will open the inbox in the user’s personal messages section (/my/messages/group/group_name).</small>"
+      advanced_group_inbox_configuration:
+        description: "Optionally customize the order and display names of group inboxes in the sidebar"
+        schema:
+          properties:
+            group:
+              label: "Group"
+              description: "Select a group to customize its position or display name in the sidebar"
+            custom_name:
+              label: "Display name"
+              description: "Optional custom name shown in the sidebar instead of the group name"
   messages: 
     title: "Messages"
     action: "New personal message"
@@ -13,3 +23,5 @@ en:
     title: "Personal inbox"
   group_inbox:
     title: "%{groupName} inbox"
+  warnings:
+    hidden_advanced_groups: "You have added the following group(s) to the `advanced_group_inbox_configuration` but also to the `hide_group_inboxes` setting: %{groups}"

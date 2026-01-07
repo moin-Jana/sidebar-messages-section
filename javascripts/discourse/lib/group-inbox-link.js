@@ -5,11 +5,12 @@ export default class GroupInboxLink extends BaseCustomSidebarSectionLink {
   prefixType = "icon";
   prefixValue = "inbox";
 
-  constructor(currentUser, pmState, group) {
+  constructor(currentUser, pmState, group, customName) {
     super();
     this.currentUser = currentUser;
     this.pmState = pmState;
     this.group = group;
+    this.customName = customName;
   }
 
   get name() {
@@ -23,7 +24,7 @@ export default class GroupInboxLink extends BaseCustomSidebarSectionLink {
   }
 
   get text() {
-    return this.group.name;
+    return this.customName || this.group.name;
   }
 
   get route() {
