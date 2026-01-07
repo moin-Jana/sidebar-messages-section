@@ -33,12 +33,6 @@ export default class GroupInboxLink extends BaseCustomSidebarSectionLink {
       : "userPrivateMessages.group";
   }
 
-  get route() {
-    return settings.use_group_page_inbox
-      ? "group.messages.inbox"
-      : "userPrivateMessages.group";
-  }
-
   get models() {
     return settings.use_group_page_inbox
       ? [this.group.name]
